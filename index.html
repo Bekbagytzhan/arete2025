@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>My Music Shop</title>
+  <style>
+    /* Roboto Mono from Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto Mono', monospace;
+      background-color: #ffffff;
+      color: #000000;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: env(safe-area-inset-top, 20px) 20px 20px;
+      z-index: 10;
+      background: #fff;
+    }
+    .logo {
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+      font-weight: 400;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 100px 20px 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 40px;
+    }
+    .item {
+      text-align: center;
+      cursor: pointer;
+    }
+    .item img {
+      width: 80%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 4px;
+    }
+    .title {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      inset: 0;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.7);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 5vh auto;
+      padding: 20px;
+      border-radius: 5px;
+      width: 95%;
+      max-width: 700px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-sizing: border-box;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .modal-images {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      margin: 10px 0;
+      padding-bottom: 10px;
+    }
+    .modal-images img {
+      flex: 0 0 auto;
+      width: auto;
+      max-height: 300px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .buy-link {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 3px;
+      font-size: 0.9rem;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      border-top: 1px solid #e0e0e0;
+    }
+    footer a {
+      margin: 0 10px;
+      font-size: 0.8rem;
+      color: #000;
+      text-decoration: none;
+    }
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+    .close-lightbox, .nav {
+      position: absolute;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .close-lightbox {
+      top: env(safe-area-inset-top, 20px);
+      right: env(safe-area-inset-right, 20px);
+    }
+    .nav.prev { left: 20px; top: 50%; transform: translateY(-50%); }
+    .nav.next { right: 20px; top: 50%; transform: translateY(-50%); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">areté2025</div>
+  </header>
+
+  <div class="container">
+    <div class="grid">
+      <div class="item" data-target="modal-digital">
+        <img src="poster1.jpg" alt="Digital Album">
+        <div class="title">Digital Album<br>2000 KZT</div>
+      </div>
+      <div class="item" data-target="modal-cdvinyl">
+        <img src="poster2.jpg" alt="CD &amp; Vinyl">
+        <div class="title">CD &amp; Vinyl<br>5000 KZT</div>
+      </div>
+      <div class="item" data-target="modal-merch">
+        <img src="front.png" alt="T-Shirt Merch">
+        <div class="title">T-Shirt Merch<br>3000 KZT</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modals -->
+  <div id="modal-merch" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>T-Shirt Merch</h3>
+      <p>Premium cotton T-shirt with exclusive artwork print. Available in S, M, L, XL.</p>
+      <div class="modal-images">
+        <img src="front.png" alt="Shirt Front">
+        <img src="back.png" alt="Shirt Back">
+      </div>
+      <a href="https://kaspi.kz/shop/p/your-tshirt-987654/?c=51737" target="_blank" class="buy-link">Buy with Kaspi Pay</a>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-lightbox">&times;</span>
+    <span class="nav prev">&#10094;</span>
+    <img src="" alt="">
+    <span class="nav next">&#10095;</span>
+  </div>
+
+  <footer>
+    <a href="about.html">About</a>
+    <a href="contacts.html">Contacts</a>
+    <a href="terms.html">Terms of Use</a>
+  </footer>
+
+  <script>
+    let currentImages = [];
+    let currentIndex = 0;
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const closeLight = lightbox.querySelector('.close-lightbox');
+    const prevBtn = lightbox.querySelector('.prev');
+    const nextBtn = lightbox.querySelector('.next');
+
+    // Open modal on item click (only merch modal shown here for brevity)
+    document.querySelectorAll('.item').forEach(el => {
+      el.addEventListener('click', () => {
+        const modalId = el.getAttribute('data-target');
+        document.getElementById(modalId).style.display = 'block';
+      });
+    });
+    // Close modal
+    document.querySelectorAll('.modal .close').forEach(span => {
+      span.addEventListener('click', () => {
+        span.closest('.modal').style.display = 'none';
+      });
+    });
+    window.addEventListener('click', event => {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+      }
+    });
+
+    // Lightbox open on image click
+    document.querySelectorAll('.modal-images img').forEach(img => {
+      img.addEventListener('click', () => {
+        const parent = img.closest('.modal-content');
+        currentImages = Array.from(parent.querySelectorAll('.modal-images img')).map(i => i.src);
+        currentIndex = currentImages.indexOf(img.src);
+        updateLightbox();
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    function updateLightbox() {
+      lightboxImg.src = currentImages[currentIndex];
+      prevBtn.style.display = currentIndex > 0 ? 'block' : 'none';
+      nextBtn.style.display = currentIndex < currentImages.length - 1 ? 'block' : 'none';
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateLightbox();
+      }
+    });
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < currentImages.length - 1) {
+        currentIndex++;
+        updateLightbox();
+      }
+    });
+    closeLight.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+    });
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) lightbox.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
