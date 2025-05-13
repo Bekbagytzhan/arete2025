@@ -5,184 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>areté2025</title>
   <style>
-    /* Roboto Mono from Google Fonts */
+    /* Roboto Mono */
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Roboto Mono', monospace;
-      background-color: #ffffff;
-      color: #000000;
-    }
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: env(safe-area-inset-top, 20px) 20px 20px;
-      z-index: 10;
-      background: #fff;
-    }
-    .logo {
-      font-size: 1.2rem;
-      letter-spacing: -0.02em;
-      font-weight: 400;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 100px 20px 20px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 40px;
-    }
-    .item {
-      text-align: center;
-      cursor: pointer;
-    }
-    .item img {
-      width: 80%;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-      border-radius: 4px;
-    }
-    .title {
-      margin-top: 12px;
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-    /* Modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background-color: rgba(0,0,0,0.7);
-      overflow: auto;
-      z-index: 100;
-    }
-    .modal-content {
-      background-color: #fff;
-      margin: 5vh auto;
-      padding: 20px;
-      border-radius: 5px;
-      width: 95%;
-      max-width: 700px;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      box-sizing: border-box;
-    }
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      cursor: pointer;
-      user-select: none;
-    }
-    .modal-images {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      margin: 10px 0;
-      padding-bottom: 10px;
-    }
-    .modal-images img {
-      flex: 0 0 auto;
-      width: auto;
-      max-height: 300px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .modal-price-and-buy {
-      text-align: center;
-      margin-top: 10px;
-    }
-    .modal-price-and-buy p {
-      font-weight: bold;
-      margin: 0;
-    }
-    .buy-link {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 20px;
-      background-color: #000;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 3px;
-      font-size: 0.9rem;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-      border-top: 1px solid #e0e0e0;
-    }
-    footer a {
-      margin: 0 10px;
-      font-size: 0.8rem;
-      color: #000;
-      text-decoration: none;
-    }
-    /* Lightbox */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 200;
-      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-    }
-    .lightbox img {
-      max-width: 90%;
-      max-height: 90%;
-    }
-    .close-lightbox, .nav {
-      position: absolute;
-      color: #fff;
-      font-size: 2rem;
-      cursor: pointer;
-      user-select: none;
-    }
-    .close-lightbox {
-      top: env(safe-area-inset-top, 20px);
-      right: env(safe-area-inset-right, 20px);
-    }
-    .nav.prev { left: 20px; top: 50%; transform: translateY(-50%); }
-    .nav.next { right: 20px; top: 50%; transform: translateY(-50%); }
+    body { margin:0; padding:0; font-family:'Roboto Mono',monospace; background:#fff; color:#000; }
+    header { position:fixed; top:0; left:0; width:100%; padding:env(safe-area-inset-top,20px) 20px 20px; background:#fff; z-index:10; }
+    .logo { font-size:1.2rem; letter-spacing:-0.02em; font-weight:400; }
+    .container { max-width:1000px; margin:0 auto; padding:100px 20px 20px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:40px; }
+    .item { text-align:center; cursor:pointer; }
+    .item img { width:80%; border-radius:4px; }
+    .title { margin-top:12px; font-size:0.9rem; line-height:1.4; }
+    .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); overflow:auto; z-index:100; }
+    .modal-content { position:relative; background:#fff; margin:5vh auto; padding:20px; border-radius:5px; width:95%; max-width:700px; max-height:90vh; overflow-y:auto; }
+    .close { position:absolute; top:10px; right:10px; font-size:1.5rem; font-weight:bold; cursor:pointer; }
+    .modal-images { display:flex; gap:10px; overflow-x:auto; margin:10px 0; padding-bottom:10px; }
+    .modal-images img { flex:0 0 auto; max-height:300px; border-radius:4px; cursor:pointer; }
+    .modal-price-and-buy { text-align:center; margin-top:10px; }
+    .modal-price-and-buy p { font-weight:bold; margin:0; }
+    .buy-link { display:inline-block; margin-top:10px; padding:10px 20px; background:#000; color:#fff; text-decoration:none; border-radius:3px; font-size:0.9rem; }
+    footer { text-align:center; padding:20px; margin-top:40px; border-top:1px solid #e0e0e0; }
+    footer a { margin:0 10px; font-size:0.8rem; color:#000; text-decoration:none; }
+    .lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:200; padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+    .lightbox img { max-width:90%; max-height:90%; }
+    .close-lightbox, .nav { position:absolute; color:#fff; font-size:2rem; cursor:pointer; user-select:none; }
+    .close-lightbox { top:env(safe-area-inset-top,20px); right:env(safe-area-inset-right,20px); }
+    .nav.prev { left:20px; top:50%; transform:translateY(-50%); }
+    .nav.next { right:20px; top:50%; transform:translateY(-50%); }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">areté2025</div>
-  </header>
+  <header><div class="logo">areté2025</div></header>
   <div class="container">
     <div class="grid">
-      <div class="item" data-target="modal-digital">
+      <div class="item" onclick="openModal('modal-digital')">
         <img src="poster1.jpg" alt="Digital Album">
         <div class="title">Digital Album<br>2000 KZT</div>
       </div>
-      <div class="item" data-target="modal-cdvinyl">
+      <div class="item" onclick="openModal('modal-cdvinyl')">
         <img src="poster2.jpg" alt="CD &amp; Vinyl">
         <div class="title">CD &amp; Vinyl<br>5000 KZT</div>
       </div>
-      <div class="item" data-target="modal-merch">
+      <div class="item" onclick="openModal('modal-merch')">
         <img src="front.png" alt="T-Shirt Merch">
         <div class="title">T-Shirt Merch<br>3000 KZT</div>
       </div>
     </div>
   </div>
+
   <!-- Digital Album Modal -->
   <div id="modal-digital" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <span class="close" onclick="closeModal('modal-digital')">&times;</span>
       <h3>Digital Album</h3>
       <p>Exclusive digital album with latest tracks in FLAC & MP3 formats.</p>
       <div class="modal-images">
@@ -195,10 +69,11 @@
       </div>
     </div>
   </div>
+
   <!-- CD & Vinyl Modal -->
   <div id="modal-cdvinyl" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <span class="close" onclick="closeModal('modal-cdvinyl')">&times;</span>
       <h3>CD &amp; Vinyl Set</h3>
       <p>Limited edition CD + vinyl package. Includes bonus tracks and colored vinyl.</p>
       <div class="modal-images">
@@ -211,5 +86,69 @@
       </div>
     </div>
   </div>
+
   <!-- Merch Modal -->
-  <div id="modal-merch" cla
+  <div id="modal-merch" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal-merch')">&times;</span>
+      <h3>T-Shirt Merch</h3>
+      <p>Premium cotton T-shirt with exclusive artwork print. Available in S, M, L, XL.</p>
+      <div class="modal-images">
+        <img src="front.png" alt="Shirt Front">
+        <img src="back.png" alt="Shirt Back">
+      </div>
+      <div class="modal-price-and-buy">
+        <p>Price: 3000 KZT</p>
+        <a href="https://kaspi.kz/shop/p/your-tshirt-987654/?c=51737" target="_blank" class="buy-link">Buy with Kaspi Pay</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+    <span class="nav prev" onclick="prevLight()">&#10094;</span>
+    <img src="" alt="">
+    <span class="nav next" onclick="nextLight()">&#10095;</span>
+  </div>
+
+  <footer>
+    <a href="about.html">About</a>
+    <a href="contacts.html">Contacts</a>
+    <a href="terms.html">Terms of Use</a>
+  </footer>
+
+  <script>
+    let currentImages = [];
+    let currentIndex = 0;
+    function openModal(id) {
+      document.getElementById(id).style.display = 'block';
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+    function prevLight() {
+      if (currentIndex > 0) { currentIndex--; updateLight(); }
+    }
+    function nextLight() {
+      if (currentIndex < currentImages.length - 1) { currentIndex++; updateLight(); }
+    }
+    function updateLight() {
+      const lb = document.getElementById('lightbox');
+      lb.querySelector('img').src = currentImages[currentIndex];
+      lb.querySelector('.prev').style.display = currentIndex>0?'block':'none';
+      lb.querySelector('.next').style.display = currentIndex<currentImages.length-1?'block':'none';
+    }
+    document.querySelectorAll('.modal-images img').forEach(img => {
+      img.addEventListener('click', () => {
+        const parent = img.closest('.modal-content');
+        currentImages = Array.from(parent.querySelectorAll('.modal-images img')).map(i => i.src);
+        currentIndex = currentImages.indexOf(img.src);
+        updateLight();
+        document.getElementById('lightbox').style.display = 'flex';
+      });
+    });
+    // Close mo
