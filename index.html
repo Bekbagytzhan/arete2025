@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>areté2025</title>
+  <title>My Music Shop</title>
   <style>
     /* Roboto Mono from Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
@@ -59,10 +59,10 @@
     .modal {
       display: none;
       position: fixed;
-      z-index: 100;
       inset: 0;
-      overflow: auto;
       background-color: rgba(0,0,0,0.7);
+      overflow: auto;
+      z-index: 100;
     }
     .modal-content {
       background-color: #fff;
@@ -99,9 +99,17 @@
       border-radius: 4px;
       cursor: pointer;
     }
+    .modal-price-and-buy {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .modal-price-and-buy p {
+      font-weight: bold;
+      margin: 0;
+    }
     .buy-link {
       display: inline-block;
-      margin-top: 15px;
+      margin-top: 10px;
       padding: 10px 20px;
       background-color: #000;
       color: #fff;
@@ -155,24 +163,22 @@
   <header>
     <div class="logo">areté2025</div>
   </header>
-
   <div class="container">
     <div class="grid">
       <div class="item" data-target="modal-digital">
         <img src="poster1.jpg" alt="Digital Album">
-        <div class="title">Digital Album<br>1990 KZT</div>
+        <div class="title">Digital Album<br>2000 KZT</div>
       </div>
       <div class="item" data-target="modal-cdvinyl">
         <img src="poster2.jpg" alt="CD &amp; Vinyl">
-        <div class="title">CD &amp; Vinyl<br>19990 KZT</div>
+        <div class="title">CD &amp; Vinyl<br>5000 KZT</div>
       </div>
       <div class="item" data-target="modal-merch">
         <img src="front.png" alt="T-Shirt Merch">
-        <div class="title">T-Shirt Merch<br>16990 KZT</div>
+        <div class="title">T-Shirt Merch<br>3000 KZT</div>
       </div>
     </div>
   </div>
-
   <!-- Digital Album Modal -->
   <div id="modal-digital" class="modal">
     <div class="modal-content">
@@ -183,110 +189,27 @@
         <img src="digital1.jpg" alt="Album Cover">
         <img src="digital2.png" alt="Tracklist Preview">
       </div>
-      <a href="https://kaspi.kz/shop/p/your-digital-album-123456/?c=51737" target="_blank" class="buy-link">Buy with Kaspi Pay</a>
+      <div class="modal-price-and-buy">
+        <p>Price: 2000 KZT</p>
+        <a href="https://kaspi.kz/shop/p/your-digital-album-123456/?c=51737" target="_blank" class="buy-link">Buy with Kaspi Pay</a>
+      </div>
     </div>
   </div>
-
   <!-- CD & Vinyl Modal -->
   <div id="modal-cdvinyl" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
       <h3>CD &amp; Vinyl Set</h3>
-      <p>Limited edition CD+vinyl package with bonus tracks and colored vinyl.</p>
+      <p>Limited edition CD + vinyl package. Includes bonus tracks and colored vinyl.</p>
       <div class="modal-images">
-        <img src="cd1.png" alt="CD Cover">
-        <img src="vinyl1.png" alt="Vinyl Preview">
+        <img src="cd1.jpg" alt="CD Cover">
+        <img src="vinyl1.jpg" alt="Vinyl Preview">
       </div>
-      <a href="https://kaspi.kz/shop/p/your-cd-vinyl-set-654321/?c=51737" target="_blank" class="buy-link">Buy with Kaspi Pay</a>
+      <div class="modal-price-and-buy">
+        <p>Price: 5000 KZT</p>
+        <a href="https://kaspi.kz/shop/p/your-cd-vinyl-set-654321/?c=51737" target="_blank" class="buy-link">Buy with Kaspi Pay</a>
+      </div>
     </div>
   </div>
-
   <!-- Merch Modal -->
-  <div id="modal-merch" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3>T-Shirt Merch</h3>
-      <p>Premium cotton T-shirt with exclusive artwork print. Available in S, M, L, XL.</p>
-      <div class="modal-images">
-        <img src="front.png" alt="Shirt Front">
-        <img src="back.png" alt="Shirt Back">
-      </div>
-      <a href="https://kaspi.kz/shop/p/your-tshirt-987654/?c=51737" target="_blank" class="buy-link">Buy with Kaspi Pay</a>
-    </div>
-  </div>
-
-  <!-- Lightbox -->
-  <div id="lightbox" class="lightbox">
-    <span class="close-lightbox">&times;</span>
-    <span class="nav prev">&#10094;</span>
-    <img src="" alt="">
-    <span class="nav next">&#10095;</span>
-  </div>
-
-  <footer>
-    <a href="about.html">About</a>
-    <a href="contacts.html">Contacts</a>
-    <a href="terms.html">Terms of Use</a>
-  </footer>
-
-  <script>
-    let currentImages = [];
-    let currentIndex = 0;
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = lightbox.querySelector('img');
-    const closeLight = lightbox.querySelector('.close-lightbox');
-    const prevBtn = lightbox.querySelector('.prev');
-    const nextBtn = lightbox.querySelector('.next');
-
-    function updateLightbox() {
-      lightboxImg.src = currentImages[currentIndex];
-      prevBtn.style.display = currentIndex > 0 ? 'block' : 'none';
-      nextBtn.style.display = currentIndex < currentImages.length - 1 ? 'block' : 'none';
-    }
-
-    // Open modal on item click
-    document.querySelectorAll('.item').forEach(el => {
-      el.addEventListener('click', () => {
-        const modalId = el.getAttribute('data-target');
-        document.getElementById(modalId).style.display = 'block';
-      });
-    });
-    // Close modal
-    document.querySelectorAll('.modal .close').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.closest('.modal').style.display = 'none';
-      });
-    });
-    window.addEventListener('click', event => {
-      if (event.target.classList.contains('modal')) {
-        event.target.style.display = 'none';
-      }
-    });
-
-    // Lightbox open on image click
-    document.querySelectorAll('.modal-images img').forEach(img => {
-      img.addEventListener('click', () => {
-        const parent = img.closest('.modal-content');
-        currentImages = Array.from(parent.querySelectorAll('.modal-images img')).map(i => i.src);
-        currentIndex = currentImages.indexOf(img.src);
-        updateLightbox();
-        lightbox.style.display = 'flex';
-      });
-    });
-
-    // Lightbox navigation
-    prevBtn.addEventListener('click', () => {
-      if (currentIndex > 0) { currentIndex--; updateLightbox(); }
-    });
-    nextBtn.addEventListener('click', () => {
-      if (currentIndex < currentImages.length - 1) { currentIndex++; updateLightbox(); }
-    });
-    closeLight.addEventListener('click', () => {
-      lightbox.style.display = 'none';
-    });
-    lightbox.addEventListener('click', e => {
-      if (e.target === lightbox) lightbox.style.display = 'none';
-    });
-  </script>
-</body>
-</html>
+  <div id="modal-merch" cla
